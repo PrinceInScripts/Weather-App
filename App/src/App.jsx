@@ -12,11 +12,12 @@ function App() {
     const [CurrentDay, setCurrentDay] = useState({});
     const [ForcastDay, setForcastDay] = useState([]);
     const [Hours, setHours] = useState([]);
+    const [Locations,setLocations]=useState([])
 
    const {data,loading,error}=useWeatherData()  
    
   return (
-    <WeatherProvider value={{searchCity,setSearchCity,CurrentDay,ForcastDay,Hours}}>
+    <WeatherProvider value={{searchCity,setSearchCity,CurrentDay,ForcastDay,Hours,Locations,setLocations}}>
      <div className='bg-black text-white'>Welcome here ..</div>
      <SearchCityName/>
      <SetLocation/>

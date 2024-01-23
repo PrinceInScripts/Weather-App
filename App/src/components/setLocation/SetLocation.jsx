@@ -4,16 +4,20 @@ import useWeatherData from "../../Hooks/Weather/useWeather";
 
 
 function SetLocation(){
-  const {searchCity}=useContext(weatherContext)
+  const {searchCity,Locations,setLocations}=useContext(weatherContext)
   const { data, error, loading } = useWeatherData(searchCity);
 
   useEffect(()=>{
-    console.log(searchCity);
+    setLocations((prev)=>[...prev,searchCity])
+    console.log(Locations);
+    console.log(data);
    
   },[searchCity])
 
   return (
-    <div>{searchCity}</div>
+    <div>
+
+    </div>
   )
 }
 

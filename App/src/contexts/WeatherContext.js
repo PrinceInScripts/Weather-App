@@ -5,7 +5,9 @@ export const weatherContext=createContext({
     CurrentDay:[],
     ForcastDay:[],
     setSearchCity:()=>{},
-    Hours:[]
+    Hours:[],
+    Locations:[],
+    setLocations:()=>{},
 })
 
 export const WeatherProvider=weatherContext.Provider

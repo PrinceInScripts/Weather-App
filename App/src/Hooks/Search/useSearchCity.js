@@ -16,8 +16,6 @@ const useSearchCity=()=>{
                if (inputData.trim() !== '') { 
                const response=await axios.get(`https://api.locationiq.com/v1/autocomplete?key=pk.bc3a694a2275b4fb6b628abe9799f9bc&q=${inputData}`)
                setSuggestion(response.data)
-               // console.log(response.data);
-               // console.log("suggestion",suggestion);
                }
                setLoading(false)
           }catch(err){

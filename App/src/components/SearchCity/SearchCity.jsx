@@ -7,12 +7,7 @@ function SearchCityName(){
    const {inputData,setInputData,setCity,suggestion,city,loading,error}=useSearchCity()
    const {searchCity,setSearchCity}=useWeather()
 
-   useEffect(()=>{
-    console.log("Input Data:", inputData);
-  console.log("Suggestions:", suggestion);
-  console.log("Mapped Suggestions:", suggestion.map((item) => item.display_name));
-  console.log(searchCity);
-   },[inputData,suggestion])
+
 
    const handleInputChange = (event) => {
     setInputData(event.target.value);
