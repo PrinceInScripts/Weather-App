@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { WeatherProvider } from './contexts/WeatherContext'
 import useWeatherData from './Hooks/Weather/useWeather';
+import SearchCityName from './components/SearchCity/SearchCity';
+
+
 
 function App() {
     const [searchCity, setSearchCity] = useState('');
@@ -14,6 +17,7 @@ function App() {
   return (
     <WeatherProvider value={{searchCity,setSearchCity,CurrentDay,ForcastDay,Hours}}>
      <div className='bg-black text-white'>Welcome here ..</div>
+     <SearchCityName/>
     </WeatherProvider>
   )
 }
