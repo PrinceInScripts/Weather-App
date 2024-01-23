@@ -6,7 +6,6 @@ import axios from 'axios'
 const useSearchCity=()=>{
      const [inputData,setInputData]=useState('')
      const [suggestion,setSuggestion]=useState([])
-     const [city,setCity]=useState('')
      const [loading,setLoading]=useState(false)
      const [error,setError]=useState('')
      
@@ -28,7 +27,7 @@ const useSearchCity=()=>{
           loadData()
      },[loadData])
 
-     return {inputData,setInputData,setCity,suggestion,city,loading,error}
+     return {inputData,setInputData,suggestion,loading,error}
 }
 
 

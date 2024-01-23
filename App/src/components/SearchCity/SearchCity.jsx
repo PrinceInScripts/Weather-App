@@ -4,7 +4,7 @@ import { useWeather } from "../../contexts/WeatherContext"
 
 
 function SearchCityName(){
-   const {inputData,setInputData,setCity,suggestion,city,loading,error}=useSearchCity()
+   const {inputData,setInputData,suggestion,loading,error}=useSearchCity()
    const {searchCity,setSearchCity}=useWeather()
 
 
@@ -23,8 +23,8 @@ function SearchCityName(){
     <div>
         <input 
         type="text" 
-        placeholder="Search City"
-        className="border-2 px-4 py-2"
+        placeholder={`Search City (${searchCity || 'Current City'})`} 
+        className="border-2 px-4 py-2 text-black"
         value={inputData}
         onChange={handleInputChange}
         />
