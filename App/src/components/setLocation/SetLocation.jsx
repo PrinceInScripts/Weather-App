@@ -13,8 +13,8 @@ function SetLocation() {
           console.log("Setting data...", data);
   
           setCurrentDay(data.current);
-          setForcastDay(data.forecast.forecastday[0].day);
-          setHours(data.forecast.forecastday[0].hour);
+          // setForcastDay(data.forecast.forecastday);
+          // setHours(data.forecast.forecastday[0].hour);
           setLocations((prev) => [...prev, data.location.name]);
   
           console.log("CurrentDay:", CurrentDay);

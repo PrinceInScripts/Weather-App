@@ -15,7 +15,7 @@ const useWeatherData = () => {
 
         setLoading(true);
         try {
-            const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=ad11eecf0aae4998a5345016241901&q=${searchCity}&days=1&aqi=no&alerts=no`);
+            const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=ad11eecf0aae4998a5345016241901&q=${searchCity}&days=7&aqi=no&alerts=no`);
             setData(response.data);
         } catch (error) {
             setError(error.message);
