@@ -6,6 +6,7 @@ import SearchCityName from './components/SearchCity/SearchCity';
 import SetLocation from './components/setLocation/SetLocation';
 import Layout from './Layout/Layout';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './Home/Home';
 
 
 
@@ -25,7 +26,7 @@ function App() {
      <SearchCityName/> */}
      {/* <SetLocation/> */}
      <Routes>
-      <Route path='/' element={<Layout/>}/>
+      <Route path='/' element={<Home/>}/>
       <Route path='/add-location' element={<SearchCityName/>}/>
      </Routes>
     </WeatherProvider>

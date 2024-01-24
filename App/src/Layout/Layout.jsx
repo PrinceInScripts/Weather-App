@@ -31,11 +31,11 @@ function Layout({ children }){
 
     
     return (
-        <div className="min-h-[90vh]">
+        <div className="min-h-[90vh] z-10">
         <div className="flex items-center justify-between w-full ">
         <div className="drawer ">
            <input id="my-drawer" type="checkbox" className="drawer-toggle"/>
-           <div className="drawer-content">
+           <div className="drawer-content fixed">
                 <label htmlFor="my-drawer">
                     <FiMenu onClick={chnageWidth} size={"32px"} className='font-bold m-4 cursor-pointer'/>
                 </label>
