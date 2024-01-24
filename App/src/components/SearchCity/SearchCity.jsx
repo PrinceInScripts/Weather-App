@@ -1,11 +1,14 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import useSearchCity from "../../Hooks/Search/useSearchCity"
-import { useWeather } from "../../contexts/WeatherContext"
+import { useWeather, weatherContext } from "../../contexts/WeatherContext"
+import Layout from "../../Layout/Layout"
+import useWeatherData from "../../Hooks/Weather/useWeatherData"
 
 
 function SearchCityName(){
-   const {inputData,setInputData,suggestion,loading,error}=useSearchCity()
-   const {searchCity,setSearchCity}=useWeather()
+   const {inputData,setInputData,suggestion,setSuggestion}=useSearchCity()
+   const {searchCity,setSearchCity,Locations,setLocations}=useContext(weatherContext)
+   const {data,loading,error}=useWeatherData(searchCity)
 
 
 
@@ -16,25 +19,42 @@ function SearchCityName(){
   const hanldeInputData=(item)=>{
    setInputData(item.display_name)
    setSearchCity(item.display_name);
-   console.log(searchCity);
+
+  setSuggestion([])
+  setLocations((prev) => [...prev, data?.location?.name]);
+     console.log(Locations);
+
   }
 
+//   useEffect(()=>{
+//    setLocations((prev) => [...prev, data?.location?.name]);
+//    console.log(Locations);
+// },[searchCity, data, setLocations,])
+
+
    return(
-    <div>
+      <Layout>
+    <div className="min-h-[70vh] flex flex-col gap-10 items-center justify-center">
+      <div className="flex flex-col justify-center items-center gap-5">
+      <h1 className="text-3xl font-bold">Search City</h1>
+        <p className="text-lg">Enter the name of the city you want to search for.</p>
+      </div>
+    
         <input 
         type="text" 
         placeholder={`Search City (${searchCity || 'Current City'})`} 
-        className="border-2 px-4 py-2 text-black"
+        className="input input-bordered input-success w-full max-w-xs"
         value={inputData}
         onChange={handleInputChange}
         />
 
         {suggestion.length>0 && <ul>
            {suggestion.map((suggest)=>(
-            <li key={suggest.place_id} onClick={()=>hanldeInputData(suggest)} className="cursor-pointer border-2">{suggest.display_name}</li>
+            <li key={suggest.place_id} onClick={()=>hanldeInputData(suggest)} className="cursor-pointer border-b-2 w-full px-4 py-2">{suggest.display_name}</li>
            )) }   
         </ul>}
     </div>
+    </Layout>
    )
 }
 

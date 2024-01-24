@@ -26,6 +26,7 @@ function App() {
      {/* <SetLocation/> */}
      <Routes>
       <Route path='/' element={<Layout/>}/>
+      <Route path='/add-location' element={<SearchCityName/>}/>
      </Routes>
     </WeatherProvider>
     </Router>

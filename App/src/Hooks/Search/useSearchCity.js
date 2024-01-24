@@ -27,7 +27,7 @@ const useSearchCity=()=>{
           loadData()
      },[loadData])
 
-     return {inputData,setInputData,suggestion,loading,error}
+     return {inputData,setInputData,setSuggestion,suggestion,loading,error}
 }
 
 

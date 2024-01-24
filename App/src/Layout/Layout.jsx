@@ -3,7 +3,7 @@ import {FiMenu} from 'react-icons/fi'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import { MdAdd } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { weatherContext } from "../contexts/WeatherContext";
 import useWeatherData from "../Hooks/Weather/useWeatherData";
 import { WiDegrees } from "react-icons/wi";
@@ -11,7 +11,7 @@ import { WiDegrees } from "react-icons/wi";
 
 function Layout({ children }){
 
-    const {searchCity}=useContext(weatherContext)
+    const {searchCity,Locations,setLocations}=useContext(weatherContext)
     const {data,loading,error}=useWeatherData(searchCity)
 
     function chnageWidth(){
@@ -28,6 +28,7 @@ function Layout({ children }){
         drawerSide[0].style.width='0'
 
     }
+
     
     return (
         <div className="min-h-[90vh]">
@@ -62,6 +63,14 @@ function Layout({ children }){
                 </li>
                 <li className="border-b-2 border-dashed">
 
+                </li>
+                <li>
+                    {Locations.length>0 && <h1>Other Location</h1>}
+                    
+                    {Locations.length>0 && Locations.map((location,index)=>(
+                        <p key={index}>{location}</p>
+                    ))}
+                   
                 </li>
                <li>
                 <Link to={"/add-location"}><button className="btn btn-neatural text-center">Managae Location</button></Link>
