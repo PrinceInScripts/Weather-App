@@ -4,6 +4,8 @@ import { WeatherProvider } from './contexts/WeatherContext'
 import useWeatherData from './Hooks/Weather/useWeatherData';
 import SearchCityName from './components/SearchCity/SearchCity';
 import SetLocation from './components/setLocation/SetLocation';
+import Layout from './Layout/Layout';
+import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 
@@ -17,11 +19,16 @@ function App() {
    const {data,loading,error}=useWeatherData()  
    
   return (
+    <Router>
     <WeatherProvider value={{searchCity,setSearchCity,CurrentDay,setCurrentDay,setForcastDay,ForcastDay,Hours,setHours,Locations,setLocations}}>
      {/* <div className='bg-black text-white'>Welcome here ..</div>
      <SearchCityName/> */}
-     <SetLocation/>
+     {/* <SetLocation/> */}
+     <Routes>
+      <Route path='/' element={<Layout/>}/>
+     </Routes>
     </WeatherProvider>
+    </Router>
   )
 }
 
