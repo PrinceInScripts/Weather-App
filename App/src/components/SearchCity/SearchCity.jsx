@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import useSearchCity from "../../Hooks/Search/useSearchCity"
-import { useWeather, weatherContext } from "../../contexts/WeatherContext"
+import { weatherContext } from "../../contexts/WeatherContext"
 import Layout from "../../Layout/Layout"
 import useWeatherData from "../../Hooks/Weather/useWeatherData"
 import { useNavigate } from "react-router-dom"

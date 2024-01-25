@@ -22,9 +22,6 @@ function App() {
   return (
     <Router>
     <WeatherProvider value={{searchCity,setSearchCity,CurrentDay,setCurrentDay,setForcastDay,ForcastDay,Hours,setHours,Locations,setLocations}}>
-     {/* <div className='bg-black text-white'>Welcome here ..</div>
-     <SearchCityName/> */}
-     {/* <SetLocation/> */}
      <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/add-location' element={<SearchCityName/>}/>

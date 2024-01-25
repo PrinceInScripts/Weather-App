@@ -1,5 +1,5 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import { useWeather, weatherContext } from "../../contexts/WeatherContext";
+import { useCallback, useEffect, useState } from "react";
+import { useWeather } from "../../contexts/WeatherContext";
 import axios from "axios";
 
 const useWeatherData = () => {
@@ -10,7 +10,7 @@ const useWeatherData = () => {
 
     const loadData = useCallback(async () => {
         if (!searchCity) {
-            return; // Don't make the API request if searchCity is undefined or falsy
+            return;
         }
 
         setLoading(true);
