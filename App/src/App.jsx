@@ -3,7 +3,6 @@ import './App.css'
 import { WeatherProvider } from './contexts/WeatherContext'
 import useWeatherData from './Hooks/Weather/useWeatherData';
 import SearchCityName from './components/SearchCity/SearchCity';
-import SetLocation from './components/setLocation/SetLocation';
 import Layout from './Layout/Layout';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home/Home';

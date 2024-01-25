@@ -6,6 +6,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import { WiDegrees } from "react-icons/wi";
 import { TbTemperatureCelsius } from "react-icons/tb";
 import { CiDroplet } from "react-icons/ci";
+import { TbUvIndex } from "react-icons/tb";
+import { WiSunrise } from "react-icons/wi";
+import { WiSunset } from "react-icons/wi";
+import { LuMoon } from "react-icons/lu";
+import { WiMoonrise } from "react-icons/wi";
+import { WiMoonset } from "react-icons/wi";
+import { FaWind } from "react-icons/fa";
+import { WiHumidity } from "react-icons/wi";
 
 
 
@@ -24,6 +32,7 @@ function Home(){
     
             console.log("CurrentDay:", CurrentDay);
             console.log("ForcastDay:", ForcastDay);
+            console.log("ForcastDay:", ForcastDay[0]);
             console.log("Hours:", Hours);
            
         }
@@ -93,7 +102,7 @@ function Home(){
                    </div>
                    <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                        <img src={CurrentDay?.condition?.icon} alt="" className="w-28 "/>
+                        <img src={CurrentDay?.condition?.icon} alt="" className="w-28 " />
                         <p className="text-4xl flex gap-0">{CurrentDay?.temp_c}<WiDegrees size={40} className="font-bold"/></p>
                     </div>
                     <div className="flex flex-col">
@@ -135,6 +144,74 @@ function Home(){
                            </div>
                         </div>
                     ))}
+                </div>
+                <div className="mt-60 w-[90%]  mx-auto py-10 px-8 border-2 relative rounded-xl z-10 bg-white">
+                    <div>
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <TbUvIndex size={30} className="text-yellow-500"/>
+                        <p className="text-xl font-semibold font-serif">UV Index</p>
+                        </div>
+                       
+                        <p className="font-bold">{CurrentDay?.uv}</p>
+                      </div>    
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <WiSunrise size={30} className="text-yellow-500"/>
+                        <p className="text-xl font-semibold font-serif">Sunrise</p>
+                        </div>
+                       
+                        <p className="font-bold">{ForcastDay[0]?.astro?.sunrise}</p>
+                      </div>    
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <WiSunset size={30} className="text-yellow-500"/>
+                        <p className="text-xl font-semibold font-serif">Sunset</p>
+                        </div>
+                       
+                        <p className="font-bold">{ForcastDay[0]?.astro?.sunset}</p>
+                      </div>    
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <LuMoon size={30} className="text-yellow-500"/>
+                        <p className="text-xl font-semibold font-serif">Moon Phase</p>
+                        </div>
+                       
+                        <p className="font-bold">{ForcastDay[0]?.astro?.moon_phase}</p>
+                      </div>    
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <WiMoonrise size={30} className="text-blue-600"/>
+                        <p className="text-xl font-semibold font-serif">Moon rise</p>
+                        </div>
+                       
+                        <p className="font-bold">{ForcastDay[0]?.astro?.moonrise}</p>
+                      </div>    
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <WiMoonset size={30} className="text-blue-600"/>
+                        <p className="text-xl font-semibold font-serif">Moon set</p>
+                        </div>
+                       
+                        <p className="font-bold">{ForcastDay[0]?.astro?.moonset}</p>
+                      </div>    
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <FaWind size={30} className="text-gray-500"/>
+                        <p className="text-xl font-semibold font-serif">Wind</p>
+                        </div>
+                       
+                        <p className="font-bold">{CurrentDay?.wind_kph} kph</p>
+                      </div>    
+                       <div className="flex justify-between border-b-2 py-4">
+                        <div className="flex items-center gap-2">
+                        <WiHumidity size={30} className="text-sky-500"/>
+                        <p className="text-xl font-semibold font-serif">Humidity</p>
+                        </div>
+                       
+                        <p className="font-bold">{CurrentDay?.humidity}%</p>
+                      </div>    
+                     </div>
                 </div>
             </div>
         </Layout>
