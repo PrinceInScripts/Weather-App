@@ -4,6 +4,9 @@ import { weatherContext } from "../contexts/WeatherContext";
 import useWeatherData from "../Hooks/Weather/useWeatherData";
 import { FaLocationDot } from "react-icons/fa6";
 import { WiDegrees } from "react-icons/wi";
+import { TbTemperatureCelsius } from "react-icons/tb";
+import { CiDroplet } from "react-icons/ci";
+
 
 
 function Home(){
@@ -48,6 +51,25 @@ function Home(){
         return formattedTimeAMPM;
     }
 
+    function formatDateWithWeekday(dateString) {
+        const currentDate = new Date();
+        const inputDate = new Date(dateString);
+    
+        const options = { weekday: 'long' };
+    
+        if (
+            currentDate.getFullYear() === inputDate.getFullYear() &&
+            currentDate.getMonth() === inputDate.getMonth() &&
+            currentDate.getDate() === inputDate.getDate()
+        ) {
+            // If it's today, display "Today"
+            return "Today";
+        } else {
+            // Otherwise, display the formatted date with the weekday
+            return inputDate.toLocaleDateString(undefined, options);
+        }
+    }
+    
     return (
         <div className="relative">
         {/* Background Image */}
@@ -87,13 +109,32 @@ function Home(){
                             
                             <p className=" w-20">{formatLastUpdatedTimeAMPM(hour.time)}</p>
                             <img src={hour?.condition?.icon} alt="" />
-                            <p className="flex">{hour?.temp_c}<WiDegrees size={24}/></p>
+                            <p className="flex font-semibold text-lg items-center">{hour?.temp_c}<TbTemperatureCelsius size={24}/></p>
                             </div>
                         ))}
                     </div>
                 </div>
-                <div className="mt-60 w-[80%] h-96 mx-auto border-2 relative z-10 bg-white">
-                    hii
+                <div className="mt-60 w-[90%] py-10 px-8  h-full mx-auto border-2 relative z-10 bg-white">
+                    {ForcastDay?.length>0 && ForcastDay.map((day)=>(
+                        <div key={day?.date} className="flex items-center justify-between">
+                           <div className="w-40">{formatDateWithWeekday(day?.date)}</div>
+                           <div className="flex items-center">
+                            <CiDroplet size={16} />
+                            {day?.day?.daily_chance_of_rain}
+                            <p>%</p>
+                            </div>
+                          
+                             
+                             <div className="flex items-center justify-center w-20">
+                                <img src={day?.day?.condition?.icon} alt="" />
+                                <p>{day?.day?.condition?.text}</p>
+                             </div>
+                      
+                           <div className="w-20">
+                          {day?.day?.maxtemp_c}/{day?.day?.mintemp_c}
+                           </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </Layout>
