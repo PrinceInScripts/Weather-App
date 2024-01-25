@@ -93,7 +93,7 @@ function Home(){
                    </div>
                    <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                        <img src={CurrentDay?.condition?.icon} alt="" className="w-28 -rotate-45"/>
+                        <img src={CurrentDay?.condition?.icon} alt="" className="w-28 "/>
                         <p className="text-4xl flex gap-0">{CurrentDay?.temp_c}<WiDegrees size={40} className="font-bold"/></p>
                     </div>
                     <div className="flex flex-col">
@@ -125,7 +125,7 @@ function Home(){
                             </div>
                           
                              
-                             <div className="flex items-center justify-center w-20">
+                             <div className="flex items-center justify-center w-40">
                                 <img src={day?.day?.condition?.icon} alt="" />
                                 <p>{day?.day?.condition?.text}</p>
                              </div>

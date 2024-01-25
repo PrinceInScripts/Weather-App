@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {FiMenu} from 'react-icons/fi'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import { MdAdd } from "react-icons/md";
@@ -7,12 +7,14 @@ import { useContext, useEffect } from "react";
 import { weatherContext } from "../contexts/WeatherContext";
 import useWeatherData from "../Hooks/Weather/useWeatherData";
 import { WiDegrees } from "react-icons/wi";
+import { RiMapPinAddLine } from "react-icons/ri";
 
 
 function Layout({ children }){
 
-    const {searchCity,Locations,setLocations}=useContext(weatherContext)
+    const {searchCity,Locations,setSearchCity,setLocations}=useContext(weatherContext)
     const {data,loading,error}=useWeatherData(searchCity)
+    const navigate=useNavigate()
 
     function chnageWidth(){
         const drawerSide=document.getElementsByClassName('drawer-side');
@@ -31,11 +33,11 @@ function Layout({ children }){
 
     
     return (
-        <div className="min-h-[90vh] z-10">
+        <div className="min-h-[90vh] ">
         <div className="flex items-center justify-between w-full ">
-        <div className="drawer ">
+        <div className="drawer absolute left-0 z-50 w-fit">
            <input id="my-drawer" type="checkbox" className="drawer-toggle"/>
-           <div className="drawer-content fixed">
+           <div className="drawer-content  fixed">
                 <label htmlFor="my-drawer">
                     <FiMenu onClick={chnageWidth} size={"32px"} className='font-bold m-4 cursor-pointer'/>
                 </label>
@@ -48,7 +50,12 @@ function Layout({ children }){
                      <AiFillCloseCircle size={24}/>
                     </button>
                 </li>
-                <li className="mt-24">
+                <li className="mt-10">
+                <div>
+        <Link to={"/add-location"}><button className="flex gap-2 btn btn-neatural items-center text-2xl font-bold w-56"> <RiMapPinAddLine size={24}/> Location</button></Link>
+        </div>
+                </li>
+                <li className="mt-20">
                     <p>Favourite Location</p>
                    <div className="flex items-center gap-4 ">
                     <div className="flex items-center justify-center gap-2">
@@ -68,7 +75,10 @@ function Layout({ children }){
                     {Locations.length>0 && <h1>Other Location</h1>}
                     
                     {Locations.length>0 && Locations.map((location,index)=>(
-                        <p key={index}>{location}</p>
+                        <p key={index} onClick={()=>{
+                            setSearchCity(location)
+                            navigate("/")
+                        }}>{location}</p>
                     ))}
                    
                 </li>
@@ -80,9 +90,7 @@ function Layout({ children }){
              </ul>
            </div>
         </div>
-        <div>
-        <Link to={"/add-location"}><button className="btn btn-primary text-xl w-56"> <MdAdd/>Add Location</button></Link>
-        </div>
+        
         </div>
         {children}
     </div>

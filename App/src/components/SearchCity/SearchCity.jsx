@@ -3,12 +3,14 @@ import useSearchCity from "../../Hooks/Search/useSearchCity"
 import { useWeather, weatherContext } from "../../contexts/WeatherContext"
 import Layout from "../../Layout/Layout"
 import useWeatherData from "../../Hooks/Weather/useWeatherData"
+import { useNavigate } from "react-router-dom"
 
 
 function SearchCityName(){
    const {inputData,setInputData,suggestion,setSuggestion}=useSearchCity()
    const {searchCity,setSearchCity,Locations,setLocations}=useContext(weatherContext)
    const {data,loading,error}=useWeatherData(searchCity)
+   const navigate=useNavigate()
 
 
 
@@ -21,15 +23,12 @@ function SearchCityName(){
    setSearchCity(item.display_name);
 
   setSuggestion([])
-  setLocations((prev) => [...prev, data?.location?.name]);
+  const locationInfo = `${data?.location?.name} ${data?.location?.region}`;
+  setLocations((prev) => [...prev, [locationInfo]]);
      console.log(Locations);
-
+    navigate("/")
   }
 
-//   useEffect(()=>{
-//    setLocations((prev) => [...prev, data?.location?.name]);
-//    console.log(Locations);
-// },[searchCity, data, setLocations,])
 
 
    return(
