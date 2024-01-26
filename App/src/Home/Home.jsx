@@ -18,6 +18,7 @@ import dayImage from "../assets/dayImage.jpg";
 import nightImage from "../assets/nightImage.jpg";
 import { FaChevronCircleLeft } from "react-icons/fa";
 import { FaChevronCircleRight } from "react-icons/fa";
+import { TailSpin } from "react-loader-spinner";
 
 function Home() {
   const {
@@ -121,6 +122,15 @@ function Home() {
     day();
   }, [dayTime]);
 
+  if (loading) {
+    return (
+        <div className="flex justify-center items-center h-full">
+          <TailSpin color="red" radius={8} />
+        </div>
+      );
+  }
+
+
   return (
     <div className="relative">
       {/* Background Image */}
@@ -149,7 +159,7 @@ function Home() {
 
       <Layout>
         <div className="min-h-90vh ">
-          <div className="mt-60 w-[90%] mx-auto py-10 px-8 relative rounded-xl z-10 bg-white">
+          <div className="mt-60 py-5 px-4 lg:py-10 lg:px-8 relative rounded-xl z-10 bg-white">
             <div>
               <p className="flex items-center gap-2 text-2xl font-semibold">
                 <FaLocationDot /> {data?.location?.name} ,{" "}
@@ -159,25 +169,27 @@ function Home() {
                 {formatLastUpdatedTime(CurrentDay.last_updated)}
               </p>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex lg:justify-between lg:flex-row items-center">
               <div className="flex items-center">
                 <img
                   src={CurrentDay?.condition?.icon}
                   alt=""
-                  className="w-28 "
+                  className="lg:w-28 w-14 "
                 />
-                <p className="text-4xl flex gap-0">
+                <p className="lg:text-4xl text-2xl flex gap-0">
                   {CurrentDay?.temp_c}
                   <WiDegrees size={40} className="font-bold" />
                 </p>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-40 items-end ">
                 <p>{CurrentDay?.condition?.text}</p>
                 <p>
                   {ForcastDay[0]?.day?.maxtemp_c}/
                   {ForcastDay[0]?.day?.mintemp_c}
                 </p>
-                <p>Feels like : {CurrentDay?.feelslike_c}</p>
+                <div className="flex">
+                    <p>Feels like {CurrentDay?.feelslike_c}</p> 
+                    </div>
               </div>
             </div>
             <div className="flex overflow-hidden">
@@ -186,7 +198,7 @@ function Home() {
               </button>
               <div
                 ref={containerRef}
-                className="flex overflow-auto px-10 py-10 gap-10"
+                className="flex overflow-auto lg:px-10 lg:py-10 py-5 px-2 gap-10"
               >
                 {Hours[0]?.length > 0 &&
                   Hours[0]?.map((hour) => (
@@ -194,11 +206,11 @@ function Home() {
                       key={hour.time_epoch}
                       className="flex items-center flex-col"
                     >
-                      <p className="w-20">
+                      <p className="w-20 text-sm lg:text-lg">
                         {formatLastUpdatedTimeAMPM(hour.time)}
                       </p>
-                      <img src={hour?.condition?.icon} alt="" />
-                      <p className="flex font-semibold text-lg items-center">
+                      <img src={hour?.condition?.icon} alt="" className="lg:w-full w-16"/>
+                      <p className="flex font-semibold text-sm lg:text-lg items-center">
                         {hour?.temp_c}
                         <TbTemperatureCelsius size={24} />
                       </p>
@@ -210,32 +222,33 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className="mt-60 w-[90%] py-10 px-8  h-full rounded-xl mx-auto border-2 relative z-10 bg-white">
+          <div className="mt-60 py-5 pr-2 lg:py-10 h-full rounded-xl border-2 relative z-10 bg-white">
             {ForcastDay?.length > 0 &&
               ForcastDay.map((day) => (
                 <div
                   key={day?.date}
-                  className="flex items-center justify-between"
+                  className="flex items-center lg:justify-between"
                 >
-                  <div className="w-40">{formatDateWithWeekday(day?.date)}</div>
-                  <div className="flex items-center">
+                  <div className="lg:w-40 w-24 lg:text-xl text-sm">{formatDateWithWeekday(day?.date)}</div>
+
+                  <div className="flex items-center ">
                     <CiDroplet size={16} />
-                    {day?.day?.daily_chance_of_rain}
-                    <p>%</p>
+                    <p className="text-sm lg:text-lg">{day?.day?.daily_chance_of_rain}</p>
+                    <p className="text-sm lg:text-lg">%</p>
                   </div>
 
-                  <div className="flex items-center justify-center w-40">
-                    <img src={day?.day?.condition?.icon} alt="" />
-                    <p>{day?.day?.condition?.text}</p>
+                  <div className="flex items-center justify-center w-32 lg:w-40">
+                    <img src={day?.day?.condition?.icon} alt="" className="lg:w-20 w-10"/>
+                    <p className="lg:text-lg hidden lg:block text-sm">{day?.day?.condition?.text}</p>
                   </div>
 
-                  <div className="w-20">
+                  <div className="w-20 text-sm">
                     {day?.day?.maxtemp_c}/{day?.day?.mintemp_c}
                   </div>
                 </div>
               ))}
           </div>
-          <div className="mt-60 w-[90%]  mx-auto py-10 px-8 border-2 relative rounded-xl z-10 bg-white">
+          <div className="mt-60 py-5 px-4 lg:py-10 border-2 relative rounded-xl z-10 bg-white">
             <div>
               <div className="flex justify-between border-b-2 py-4">
                 <div className="flex items-center gap-2">
@@ -261,7 +274,7 @@ function Home() {
 
                 <p className="font-bold">{ForcastDay[0]?.astro?.sunset}</p>
               </div>
-              <div className="flex justify-between border-b-2 py-4">
+              <div className="lg:flex hidden justify-between border-b-2 py-4">
                 <div className="flex items-center gap-2">
                   <LuMoon size={30} className="text-yellow-500" />
                   <p className="text-xl font-semibold font-serif">Moon Phase</p>
