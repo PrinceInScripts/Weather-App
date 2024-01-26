@@ -25,7 +25,6 @@ function SearchCityName(){
   setSuggestion([])
   const locationInfo = `${data?.location?.name} ${data?.location?.region}`;
   setLocations((prev) => [...prev, [locationInfo]]);
-     console.log(Locations);
     navigate("/")
   }
 

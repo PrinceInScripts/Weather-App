@@ -60,7 +60,7 @@ function Layout({ children }) {
                 </div>
               </li>
               <li className="mt-20">
-                <p>Favourite Location</p>
+                <p className="text-xl font-bold underline">Favourite Location</p>
                 <div className="flex items-center gap-4 ">
                   <div className="flex items-center justify-center gap-2">
                     <FaLocationDot />
@@ -81,7 +81,7 @@ function Layout({ children }) {
               </li>
               <li className="border-b-2 border-dashed"></li>
               <li>
-                {Locations.length > 0 && <h1>Other Location</h1>}
+                {Locations.length > 0 && <h1 className="text-xl font-bold underline">Other Location</h1>}
 
                 {Locations.length > 0 &&
                   Locations.map((location, index) => (
@@ -89,8 +89,10 @@ function Layout({ children }) {
                       key={index}
                       onClick={() => {
                         setSearchCity(location);
+                        hideDrawer()
                         navigate("/");
                       }}
+                      className="border-b-2 font-serif"
                     >
                       {location}
                     </p>

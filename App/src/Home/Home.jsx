@@ -23,18 +23,12 @@ function Home(){
 
     useEffect(() => {
         if (searchCity && data && Object.keys(data).length > 0) {
-            console.log("Setting data...", data);
-    
+           
             setCurrentDay(data.current);
             setForcastDay(data.forecast.forecastday.map((day)=>day));
             setHours(data.forecast.forecastday.map((day)=>day.hour));
            
     
-            console.log("CurrentDay:", CurrentDay);
-            console.log("ForcastDay:", ForcastDay);
-            console.log("ForcastDay:", ForcastDay[0]);
-            console.log("Hours:", Hours);
-           
         }
     }, [searchCity, data, setLocations, setCurrentDay, setForcastDay, setHours]);
 
