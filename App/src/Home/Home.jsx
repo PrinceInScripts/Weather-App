@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
 import { weatherContext } from "../contexts/WeatherContext";
 import useWeatherData from "../Hooks/Weather/useWeatherData";
@@ -14,12 +14,15 @@ import { WiMoonrise } from "react-icons/wi";
 import { WiMoonset } from "react-icons/wi";
 import { FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
+import dayImage from "../assets/dayImage.jpg"
+import nightImage from "../assets/nightImage.jpg"
 
 
 
 function Home(){
     const { searchCity, Locations, setLocations, CurrentDay, setCurrentDay, setForcastDay,Hours, ForcastDay, setHours } = useContext(weatherContext);
     const { data, error, loading } = useWeatherData();
+    const [dayTime,setDayTime]=useState(true)
 
     useEffect(() => {
         if (searchCity && data && Object.keys(data).length > 0) {
@@ -72,18 +75,37 @@ function Home(){
             return inputDate.toLocaleDateString(undefined, options);
         }
     }
+
+    function day(){
+       const currentDate=new Date()
+       const hour=currentDate.getHours()
+       if(hour<=6 && hour>=18){
+        setDayTime(false)
+       }
+    }
+    
+    useEffect(()=>{
+       day()
+    },[dayTime])
     
     return (
         <div className="relative">
         {/* Background Image */}
-        <img
-            src="https://images.unsplash.com/photo-1541119638723-c51cbe2262aa?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGF5JTIwc2t5fGVufDB8fDB8fHww"
-            className="w-full h-96 object-cover fixed top-0 left-0 z-0"
+        {dayTime? <img
+            src={dayImage}
+            className="w-full h-[30rem] object-cover fixed top-0 left-0 z-0"
             alt=""
-        />
+        /> :
+        <img
+        src={nightImage}
+        className="w-full h-[30rem] object-cover fixed top-0 left-0 z-0"
+        alt=""
+    />
+        }
+       
 
         {/* Text Overlay */}
-        <div className="absolute top-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black text-4xl font-bold text-center w-full z-1">
+        <div className={`absolute top-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${dayTime ? 'text-black': 'text-white' }  text-4xl font-bold text-center w-full z-1`}>
             Weather
         </div>
 

@@ -3,7 +3,7 @@ import { FiMenu } from "react-icons/fi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { MdAdd } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { weatherContext } from "../contexts/WeatherContext";
 import useWeatherData from "../Hooks/Weather/useWeatherData";
 import { WiDegrees } from "react-icons/wi";
@@ -13,6 +13,7 @@ function Layout({ children }) {
   const { searchCity, Locations, setSearchCity } = useContext(weatherContext);
   const { data, loading, error } = useWeatherData(searchCity);
   const navigate = useNavigate();
+  const [dayTime,setDayTime]=useState(true)
 
   function chnageWidth() {
     const drawerSide = document.getElementsByClassName("drawer-side");
@@ -27,6 +28,18 @@ function Layout({ children }) {
     drawerSide[0].style.width = "0";
   }
 
+  function day(){
+    const currentDate=new Date()
+    const hour=currentDate.getHours()
+    if(hour<=6 && hour>=18){
+     setDayTime(false)
+    }
+ }
+ 
+ useEffect(()=>{
+    day()
+ },[dayTime])
+
   return (
     <div className="min-h-[90vh] ">
       <div className="flex items-center justify-between w-full ">
@@ -37,7 +50,7 @@ function Layout({ children }) {
               <FiMenu
                 onClick={chnageWidth}
                 size={"32px"}
-                className="font-bold m-4 cursor-pointer"
+                className={`font-bold ${dayTime ? 'text-black' : 'text-white'} m-4 cursor-pointer`}
               />
             </label>
           </div>
@@ -61,7 +74,7 @@ function Layout({ children }) {
               </li>
               <li className="mt-20">
                 <p className="text-xl font-bold underline">Favourite Location</p>
-                <div className="flex items-center gap-4 ">
+                <div onClick={()=>navigate("/")} className="flex items-center gap-4 ">
                   <div className="flex items-center justify-center gap-2">
                     <FaLocationDot />
                     <p>{searchCity}</p>
