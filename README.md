@@ -3,7 +3,7 @@
   * [Configuration and Setup](#configuration-and-setup)
   * [Key Features](#key-features)
   * [Technologies used](#technologies-used)
-      - [Frontend](#App)
+      - [App](#App)
       - [Api](#api)
       - [Database](#database)
   * [📸 Screenshots](#screenshots)
